@@ -8,7 +8,6 @@
 <script>
 export default {
   name: "EventCard",
-  // Event Props === So the parent can feed this component an event object to display
   props: {
     event: Object,
   },
