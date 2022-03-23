@@ -1,26 +1,20 @@
 <template>
   <div class="events">
     <h1>Events For Good</h1>
-    <!-- V-For directive === loop through the events data object -->
-    <!-- :key === give each event a unique key, gives Vue a way to identify and can keep tracl of each unique "EventCard" -->
-    <!-- As we iterate over the "events" array to create a new "EventCard" for each event object, we're passing in that "event" object into a new ":event" prop we've added to the "EventCard". This way, each "EventCard" has all of the data it needs to display its own event info -->
     <EventCard v-for="event in events" :key="event.id" :event="event" />
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
-// EventCard is a child component to this file
 import EventCard from "@/components/EventCard.vue";
 export default {
-  name: "HomeView",
+  name: "EventList",
   components: {
     EventCard, // register it as a child component
   },
-  // Data Option
   data() {
     return {
-      // Events Data
       events: [
         {
           id: 5928101,
@@ -61,7 +55,6 @@ export default {
 };
 </script>
 
-<!-- "Scoped" attribute allows us to "scope and isolate" these styles to just this component -->
 <style scoped>
 .events {
   display: flex;

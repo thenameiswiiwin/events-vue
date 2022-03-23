@@ -1,8 +1,10 @@
 <template>
   <nav>
-    <router-link to="/">Home</router-link> |
+    <!-- Router-Link === determine which path to navigate to -->
+    <router-link to="/">Events</router-link> |
     <router-link to="/about">About</router-link>
   </nav>
+  <!-- Router-View === Placeholder, replaced by route's component -->
   <router-view />
 </template>
 
