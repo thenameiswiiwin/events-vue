@@ -1,5 +1,5 @@
 <template>
-  if have an event, then display the details. If not, have to wait.
+  <!-- if have an event, then display the details. If not, have to wait. -->
   <div v-if="event">
     <h1>{{ event.title }}</h1>
     <p>{{ event.time }} on {{ event.date }} @ {{ event.location }}</p>
