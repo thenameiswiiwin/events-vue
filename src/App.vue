@@ -1,8 +1,8 @@
 <template>
   <nav>
     <!-- Router-Link === determine which path to navigate to -->
-    <router-link to="/">Events</router-link> |
-    <router-link to="/about">About</router-link>
+    <router-link :to="{ name: 'EventList' }">Events</router-link> |
+    <router-link :to="{ name: 'about' }">About</router-link>
   </nav>
   <!-- Router-View === Placeholder, replaced by route's component -->
   <router-view />
