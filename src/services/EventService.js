@@ -1,7 +1,8 @@
 import axios from "axios";
 
 const apiClient = axios.create({
-  baseURL: "https://my-json-server.typicode.com/thenameiswiiwin/real-world-vue",
+  baseURL:
+    "https://my-json-server.typicode.com/thenameiswiiwin/real-world-events-vue",
   withCredentials: false,
   headers: {
     Accept: "application/json",
@@ -12,9 +13,9 @@ const apiClient = axios.create({
 export default {
   // perPage === Event to return per page
   // page === the page we're on
-  getEvents(perPage, page) {
+  getEvents() {
     // URL string
-    return apiClient.get("/events?_limit=" + perPage + "&_page=" + page);
+    return apiClient.get("/events");
   },
   getEvent(id) {
     return apiClient.get(`/events/${id}`);
