@@ -1,6 +1,4 @@
 <template>
-  <!-- v-bind to an object, inside the object, we specified the name of the route we want to route to. Route to the name of the component Make it more scalible, dont need to go to each route and update the path manually, easier to maintain. All you need to change of the route itself, to update -->
-  <!-- params === add event id to router's parameter.  -->
   <router-link
     class="event-link"
     :to="{ name: 'EventDetails', params: { id: event.id } }"

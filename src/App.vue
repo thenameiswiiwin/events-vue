@@ -1,14 +1,11 @@
 <template>
   <nav>
-    <!-- Router-Link === determine which path to navigate to -->
     <router-link :to="{ name: 'EventList' }">Events</router-link> |
     <router-link :to="{ name: 'about' }">About</router-link>
   </nav>
-  <!-- Router-View === Placeholder, replaced by route's component -->
   <router-view />
 </template>
 
-<!-- Global Style -->
 <style>
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
