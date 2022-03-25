@@ -10,10 +10,8 @@ const routes = [
     component: EventList,
   },
   {
-    // :id === dynamic segment === a placeholder that will get updated with the event's id
     path: "/event/:id",
     name: "EventDetails",
-    // Can now sent in the route params as component props
     props: true,
     component: EventDetails,
   },

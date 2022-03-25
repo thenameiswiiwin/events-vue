@@ -1,24 +1,10 @@
-# real-world-vue
+# TODO
 
-## Project setup
 ```
-yarn install
+[] Modify the EventService API call to take "perPage" and "page"
+[] Parse & set the current "page" from the router using Function Mode
+[] Modify EventList.vue to pass on "page" number to EventService API
+[] Add Pagination links to the EventList Template
+[] Only show the Next page link when there is a Next page
+[] Improve the pagination styling
 ```
-
-### Compiles and hot-reloads for development
-```
-yarn serve
-```
-
-### Compiles and minifies for production
-```
-yarn build
-```
-
-### Lints and fixes files
-```
-yarn lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
