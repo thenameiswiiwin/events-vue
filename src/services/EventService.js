@@ -14,7 +14,7 @@ export default {
   // page === the page we're on
   getEvents(perPage, page) {
     // URL string
-    return apiClient.get("/events?=limit=" + perPage + "&_page=" + page);
+    return apiClient.get("/events?_limit=" + perPage + "&_page=" + page);
   },
   getEvent(id) {
     return apiClient.get(`/events/${id}`);
