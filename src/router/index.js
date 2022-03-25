@@ -8,6 +8,7 @@ const routes = [
     path: "/",
     name: "EventList",
     component: EventList,
+    // JavaScript object, defines the page property. If page exists parse the string to an integer, otherwise return 1.
   },
   {
     path: "/event/:id",
