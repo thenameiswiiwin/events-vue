@@ -12,8 +12,10 @@ import EventService from "@/services/EventService.js";
 
 export default {
   name: "EventList",
+  // This component received a prop called "page"
+  props: ["page"],
   components: {
-    EventCard, // register it as a child component
+    EventCard,
   },
   data() {
     return {
@@ -21,7 +23,8 @@ export default {
     };
   },
   created() {
-    EventService.getEvents()
+    // Inside the created() lifecycle hook, send in "2" Events per page, and "this.page" Send in the current page
+    EventService.getEvents(2, this.page)
       .then((res) => {
         this.events = res.data;
       })

@@ -8,12 +8,11 @@ const routes = [
     path: "/",
     name: "EventList",
     component: EventList,
+    // JavaScript object, defines the page property. If page exists parse the string to an integer, otherwise return 1.
   },
   {
-    // :id === dynamic segment === a placeholder that will get updated with the event's id
     path: "/event/:id",
     name: "EventDetails",
-    // Can now sent in the route params as component props
     props: true,
     component: EventDetails,
   },
