@@ -1,14 +1,15 @@
 # TODO
 
-<<<<<<< HEAD
 =======
+
 ## Live Site
+
 ```
 https://events-for-good-l7jz.onrender.com/
 ```
 
-## Project setup
->>>>>>> main
+## TODO
+
 ```
 [x] Modify the EventService API call to take "perPage" and "page"
 [] Parse & set the current "page" from the router using Function Mode
