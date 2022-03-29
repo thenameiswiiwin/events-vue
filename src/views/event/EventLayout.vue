@@ -13,9 +13,9 @@
 </template>
 
 <script>
-import EventService from '@/services/EventService.js';
+import EventService from "@/services/EventService.js";
 export default {
-  props: ['id'],
+  props: ["id"],
   data() {
     return {
       event: null,
@@ -29,12 +29,12 @@ export default {
       .catch((error) => {
         if (error.response && error.response.status == 404) {
           this.$router.push({
-            name: '404Resource',
-            params: { resouce: 'event' },
+            name: "404Resource",
+            params: { resouce: "event" },
           });
         } else {
           this.$router.push({
-            name: 'NetworkError',
+            name: "NetworkError",
           });
         }
       });
