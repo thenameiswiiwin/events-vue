@@ -8,14 +8,15 @@
       <h4>{{ event.title }}</h4>
     </div>
   </router-link>
-  |
 </template>
 
 <script>
 export default {
-  name: "EventCard",
   props: {
-    event: Object,
+    event: {
+      type: Object,
+      required: true,
+    },
   },
 };
 </script>
