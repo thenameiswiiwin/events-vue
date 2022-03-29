@@ -31,7 +31,6 @@ import { watchEffect } from "vue";
 
 export default {
   name: "EventList",
-  // This component received a prop called "page"
   props: ["page"],
   components: {
     EventCard,
@@ -43,24 +42,21 @@ export default {
     };
   },
   created() {
-    // When reative obkect that are accessed inside this function change, run this function again.
     watchEffect(() => {
-      // Clear out the events on the page, so our user knows the API has been called.
       this.events = null;
-      // Inside the created() lifecycle hook, send in "2" Events per page, and "this.page" Send in the current page
       EventService.getEvents(2, this.page)
-        .then((res) => {
-          this.events = res.data;
-          this.totalEvents = res.headers["x-total-count"];
+        .then((response) => {
+          this.events = response.data;
+          this.totalEvents = response.headers["x-total-count"];
         })
-        .catch((err) => {
-          console.log(err);
+        .catch((error) => {
+          console.log(error);
         });
     });
   },
   computed: {
     hasNextPage() {
-      let totalPages = Math.ceil(this.totalEvents / 2);
+      var totalPages = Math.ceil(this.totalEvents / 2);
       return this.page < totalPages;
     },
   },

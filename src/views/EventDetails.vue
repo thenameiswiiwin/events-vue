@@ -17,11 +17,11 @@ export default {
   },
   created() {
     EventService.getEvent(this.id)
-      .then((res) => {
-        this.event = res.data;
+      .then((response) => {
+        this.event = response.data;
       })
-      .catch((err) => {
-        console.log(err);
+      .catch((error) => {
+        console.log(error);
       });
   },
 };
