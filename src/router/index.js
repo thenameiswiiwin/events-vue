@@ -39,7 +39,7 @@ const routes = [
   {
     path: "/about",
     name: "about",
-    component: about,
+    component: About,
   },
 ];
 
