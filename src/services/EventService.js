@@ -1,20 +1,20 @@
-import axios from "axios";
+import axios from 'axios';
 
 const apiClient = axios.create({
   baseURL:
-    "https://my-json-server.typicode.com/thenameiswiiwin/real-world-events-vue",
+    'https://my-json-server.typicode.com/thenameiswiiwin/real-world-events-vue',
   withCredentials: false,
   headers: {
-    Accept: "application/json",
-    "Content-Type": "application/json",
+    Accept: 'application/json',
+    'Content-Type': 'application/json',
   },
 });
 
 export default {
   getEvents(perPage, page) {
-    return apiClient.get("/events?_limit=" + perPage + "&_page=" + page);
+    return apiClient.get('/events?_limit=' + perPage + '&_page=' + page);
   },
   getEvent(id) {
-    return apiClient.get("/events/" + id);
+    return apiClient.get('/events/' + id);
   },
 };
