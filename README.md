@@ -9,6 +9,7 @@ https://events-for-good-l7jz.onrender.com/
 ## TODO
 
 ```
-[x] Update Component's Router Path
-[x] Redirect the old route to the new route
+[x] When user tries to navigate to a page that doesn't exist
+[] When user navigates to a resource that doesn't exist.
+[] When user's network connectivity fails.
 ```
