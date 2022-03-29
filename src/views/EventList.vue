@@ -9,7 +9,7 @@
         :to="{ name: 'EventList', query: { page: page - 1 } }"
         rel="prev"
         v-if="page != 1"
-        >&#60; Prev
+        >&#60; Previous
       </router-link>
 
       <router-link
@@ -24,7 +24,6 @@
 </template>
 
 <script>
-// @ is an alias to /src
 import EventCard from "@/components/EventCard.vue";
 import EventService from "@/services/EventService.js";
 import { watchEffect } from "vue";
