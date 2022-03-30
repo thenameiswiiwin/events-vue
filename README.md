@@ -15,6 +15,6 @@ https://events-for-good-l7jz.onrender.com/
   - Allow us to include extra information with our routes
 [x] Lazy Loading Routes
   - Split parts of our application into different JavaScript files
-[] Scroll Behavior
+[x] Scroll Behavior
   - To make our navigation more user-friendly
 ```
