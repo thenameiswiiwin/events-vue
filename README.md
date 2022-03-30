@@ -10,18 +10,20 @@ https://events-for-good-l7jz.onrender.com/
 
 ## Project Setup
 
-```
-> git clone https://github.com/thenameiswiiwin/real-world-events-vue.git
-  >> Cloning this project
-> yarn install
-  >> Installing all dependencies
-> yarn serve
-  >> Compiles and hot-reloads for development
-> yarn build
-  >> Compiles and minifies for production
-> yarn lint
-  >> Lints and fixes files
-```
+* Cloning this project:
+`git clone https://github.com/thenameiswiiwin/real-world-events-vue.git`
+
+* Installing all dependencies
+`yarn install`
+
+* Compiles and hot-reloads for development
+`yarn serve`
+
+* Compiles and minifies for production
+`yarn build`
+
+* Lints and fixes files
+`yarn lint`
 
 ---
 
