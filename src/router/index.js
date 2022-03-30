@@ -4,12 +4,15 @@ import EventLayout from "@/views/event/EventLayout.vue";
 import EventDetails from "@/views/event/EventDetails.vue";
 import EventRegister from "@/views/event/EventRegister.vue";
 import EventEdit from "@/views/event/EventEdit.vue";
-import About from "@/views/AboutView.vue";
 import NotFound from "@/views/NotFound.vue";
 import NetworkError from "@/views/NetworkError.vue";
 import NProgress from "nprogress";
 import EventService from "@/services/EventService.js";
 import GStore from "@/store";
+
+// Don't load this code until it's requested.
+const About = () =>
+  import(/* webpackChunkName: "About" */ "../views/AboutView.vue");
 
 const routes = [
   {
@@ -54,6 +57,7 @@ const routes = [
         path: "edit",
         name: "EventEdit",
         component: EventEdit,
+        meta: { requireAuth: true },
       },
     ],
   },
@@ -66,6 +70,9 @@ const routes = [
   {
     path: "/about",
     name: "about",
+    // Route level code-splitting
+    // This generates a separate chunk (about.[hash].js) for his route
+    // Which is lazy-loaded when the route is visited
     component: About,
   },
   {
@@ -89,10 +96,34 @@ const routes = [
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
   routes,
+  // Upon navigation, always move the page to the top
+  scrollBehavior(to, from, savedPosition) {
+    // "savedPosition" for this page, if it exists.
+    if (savedPosition) {
+      return savedPosition;
+    } else {
+      return { top: 0 };
+    }
+  },
 });
 
-router.beforeEach(() => {
+router.beforeEach((to, from) => {
   NProgress.start();
+
+  const notAuthorized = true;
+  if (to.meta.requireAuth && notAuthorized) {
+    GStore.flashMessage = "Sorry, you are not authorized to view this page";
+
+    setTimeout(() => {
+      GStore.flashMessage = "";
+    }, 3000);
+
+    if (from.href) {
+      return false;
+    } else {
+      return { path: "/" };
+    }
+  }
 });
 
 router.afterEach(() => {
