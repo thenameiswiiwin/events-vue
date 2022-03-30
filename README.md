@@ -1,7 +1,9 @@
 # Building-Pagination
 
 ## Live Site
+
 Dynamic-Routing
+
 ```
 https://events-for-good-l7jz.onrender.com/
 ```
@@ -9,7 +11,7 @@ https://events-for-good-l7jz.onrender.com/
 ## TODO
 
 ```
-[x] When user tries to navigate to a page that doesn't exist
-[x] When user navigates to a resource that doesn't exist.
-[x] When user's network connectivity fails.
+[x] Creatre global storage mechanism to store a flash message
+[x] Set the flash message inside Register.vue
+[x] Create a place where the flash message is displayed
 ```
