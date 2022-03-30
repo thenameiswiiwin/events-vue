@@ -13,16 +13,16 @@ https://events-for-good-l7jz.onrender.com/
 * Cloning this project:
 `git clone https://github.com/thenameiswiiwin/real-world-events-vue.git`
 
-* Installing all dependencies
+* Installing all dependencies:
 `yarn install`
 
-* Compiles and hot-reloads for development
+* Compiles and hot-reloads for development:
 `yarn serve`
 
-* Compiles and minifies for production
+* Compiles and minifies for production:
 `yarn build`
 
-* Lints and fixes files
+* Lints and fixes files:
 `yarn lint`
 
 ---
@@ -30,10 +30,10 @@ https://events-for-good-l7jz.onrender.com/
 ## Packages Used:
 
 ```
-> Axios
-  >> Promise based HTTP client for the browser and node.js
-> NProgress
-  >> For slim progress bars for Ajax'y applications.
+* Axios
+  |- Promise based HTTP client for the browser and node.js
+* NProgress
+  |- For slim progress bars for Ajax'y applications.
 ```
 
 ---
@@ -41,11 +41,11 @@ https://events-for-good-l7jz.onrender.com/
 ## Hosting and Database
 
 ```
-> Render
-  >> Unified cloud to build and run all your apps and websites with free TLS certificates, a global CDN, DDoS protection, private networks, and auto deploys from Git.
-> My JSON Server
-  >> Get a full fake REST API.
-  >> db.json
+* Render
+  |- Unified cloud to build and run all your apps and websites with free TLS certificates, a global CDN, DDoS protection, private networks, and auto deploys from Git.
+* My JSON Server
+  |- Get a full fake REST API.
+  |- db.json
 ```
 
 ---
