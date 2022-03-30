@@ -11,7 +11,10 @@ https://events-for-good-l7jz.onrender.com/
 ## TODO
 
 ```
-[x] Creatre global storage mechanism to store a flash message
-[x] Set the flash message inside Register.vue
-[x] Create a place where the flash message is displayed
+[x] Progress Bar, In-Component Route Guards
+[x] Move API call into an In-Component Route Guard
+[x] Install nprogress, progress bar library
+[x] Start progress bar when routing to the component
+[x] Finish the progress bar when API call finishes
+[x] Ensure that pagination still works
 ```
