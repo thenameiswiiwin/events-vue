@@ -210,3 +210,11 @@ props: route => {
 It’s a little more verbose, but I wanted to show you this to remind you that you could place complex transformations or validations inside this function.
 
 ---
+
+# 2. Vuex
+
+> ## Overview
+
+Vuex: Vue's state management library.
+
+> ## The Case for State Management
