@@ -8,7 +8,7 @@ import NotFound from "@/views/NotFound.vue";
 import NetworkError from "@/views/NetworkError.vue";
 import NProgress from "nprogress";
 import EventService from "@/services/EventService.js";
-import GStore from "@/store";
+import store from "@/store";
 
 // Don't load this code until it's requested.
 const About = () =>
@@ -29,7 +29,7 @@ const routes = [
     beforeEnter: (to) => {
       return EventService.getEvent(to.params.id)
         .then((response) => {
-          GStore.event = response.data;
+          store.state.event = response.data;
         })
         .catch((error) => {
           if (error.response && error.response.status == 404) {
@@ -112,10 +112,11 @@ router.beforeEach((to, from) => {
 
   const notAuthorized = true;
   if (to.meta.requireAuth && notAuthorized) {
-    GStore.flashMessage = "Sorry, you are not authorized to view this page";
+    store.state.flashMessage =
+      "Sorry, you are not authorized to view this page";
 
     setTimeout(() => {
-      GStore.flashMessage = "";
+      store.state.flashMessage = "";
     }, 3000);
 
     if (from.href) {

@@ -42,7 +42,6 @@ export default {
   beforeRouteEnter(routeTo, routeFrom, next) {
     EventService.getEvents(2, parseInt(routeTo.query.page) || 1)
       .then((response) => {
-        // "Next" tells Vue Router to wait until the API call returns, before routing.
         next((comp) => {
           comp.events = response.data;
           comp.totalEvents = response.headers["x-total-count"];
@@ -53,7 +52,6 @@ export default {
       });
   },
   beforeRouteUpdate(routeTo) {
-    // Return the promise so Vue Router knows to wait fon the API call "before" loading the page.
     return EventService.getEvents(2, parseInt(routeTo.query.page) || 1)
       .then((response) => {
         this.events = response.data;
