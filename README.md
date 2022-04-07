@@ -218,3 +218,101 @@ It’s a little more verbose, but I wanted to show you this to remind you that y
 Vuex: Vue's state management library.
 
 > ## The Case for State Management
+
+Vuex is Vue-s own state management pattern and library.
+
+State is the data that your components depend on and render. Things like blog posts, to-do items, and so on. Without Vuex, as your applications grows, each Vue component might have its own version of state.
+
+But if one component changes its state, and a distant relativ is also using the same state, we need to communicate that change. There's the default way of comunicting events up and passing props down to share data, but that can become overly complicated. Instead we can consolidate all of our state into one place. One location that contains the current state of our entire application. One single source of truth.
+
+`A Single Source of Truth` This is what Vuex provides, and every component has direct access to this global state.
+
+Just like the Vue instance's data, this State is reactive. When one component updates the State, other components that are using that datat get notified, automatically receiving the new value.
+
+But just consolidating datat into a single source of truth doesn't fully solve the problems of managing state. We need some standardization, Otherwise, changes to our State could be unpredictable and untraceable.
+
+> ## A State Management Pattern
+
+Vuex provides a full state management pattern for a simple and standardized way to make state changes.
+
+```JavaScript
+const state = new Vuex.Store({
+    state: {
+        ...
+    },
+    mutations: {
+        ...
+    },
+    actions: {
+        ...
+    },
+    getters: {
+        ...
+    },
+})
+```
+
+While the Vue instance has a `data` property, the Vuex store has `state`. Both are reactive.
+
+And while the instance has `methods`, which among other things can update `data`, the store has `actions`, which can update the state.
+
+And while theinstance has `computed` properties, the store has `getters`, which allow us to access a filtered, derived, and computed version of our `state`.
+
+Additonally, Vuex provides a way to track state changes, with something called `mutation`. We can use `actions` to commit `mutations`.
+
+> ## An example Vuex Store
+
+```JavaScript
+const store = new Vuex.Store({
+    state: {
+        isLoading: false,
+        todos: []
+    },
+    mutations: {
+        SET_LOADING_STATUS(state) {
+            state.isLoading = !state.isLoading
+        },
+        SET_TODOS(state, todos) {
+            state.todos = todos
+        }
+    },
+    actions: {
+        fetchTodos(context) {
+            fetchTodos(context) {
+                context.commit('SET_LOADING_STATUS')
+                axios.get('/api/todos').then(response => {
+                    context.commit('SET_LOADING_STATUS')
+                    context.commit('SET_TODOS', response.data.todos)
+                })
+            }
+        }
+    },
+})
+```
+
+In our `State`, we have an `isLoading` property, along an array for `todos`.
+
+Below that we have `Mutation` to switch our `isLoading` state between `true` and `false`. Along with a Mutation to set our state with the todos that we'll receive from an API call in our action below.
+
+Our `Action` here has multiple steps. First, it'll commit the Mutation to set the `isLoading` status to `true`. Then it'll make an API call, then when the response returns, it will commit the Mutation to set the `isLoading` status to `false`. Finally it'll commit the Mutation to set the state of our `todos` with the response we got back from our API.
+
+If we need the ability to only reteive the todos that are labeled done, we can use a Getter for that, which will retieve only the specific state that we want.
+
+```JavaScript
+const store = new Vuex.Store({
+    state: {
+        isLoading: false,
+        todos: [
+            { id: 1, text: '...', done: true },
+            { id: 2, text: '...', done: false },
+            { id: 3, text: '...', done: true },
+        ]
+    },
+    getters: {
+        doneTodos(state) {
+            return state.todos.filter(todo => todo.done)
+        }
+    }
+})
+```
+
