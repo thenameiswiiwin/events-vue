@@ -1,12 +1,17 @@
-import { createStore } from "vuex";
+import { createStore } from 'vuex';
 
 export default createStore({
   state: {
-    flashMessage: "",
+    flashMessage: '',
     event: null,
-    user: "Huy Nguyen",
+    events: [],
+    user: 'Huy Nguyen',
   },
-  mutations: {},
+  mutations: {
+    ADD_EVENT(state, event) {
+      state.events.push(event);
+    },
+  },
   actions: {},
   modules: {},
 });
