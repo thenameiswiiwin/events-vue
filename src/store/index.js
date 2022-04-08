@@ -4,9 +4,14 @@ export default createStore({
   state: {
     flashMessage: "",
     event: null,
+    events: [],
     user: "Huy Nguyen",
   },
-  mutations: {},
+  mutations: {
+    ADD_EVENT(state, event) {
+      state.events.push(event);
+    },
+  },
   actions: {},
   modules: {},
 });
