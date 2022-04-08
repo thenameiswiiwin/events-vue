@@ -1,17 +1,18 @@
 import { createRouter, createWebHistory } from "vue-router";
 import EventList from "@/views/EventList.vue";
+import EventCreate from "@/views/EventCreate.vue";
+import NotFound from "@/views/NotFound.vue";
+import NetworkError from "@/views/NetworkError.vue";
 import EventLayout from "@/views/event/EventLayout.vue";
 import EventDetails from "@/views/event/EventDetails.vue";
 import EventRegister from "@/views/event/EventRegister.vue";
 import EventEdit from "@/views/event/EventEdit.vue";
-import NotFound from "@/views/NotFound.vue";
-import NetworkError from "@/views/NetworkError.vue";
-import NProgress from "nprogress";
 import EventService from "@/services/EventService.js";
 import store from "@/store";
+import NProgress from "nprogress";
 
 // Don't load this code until it's requested.
-const About = () =>
+const AboutView = () =>
   import(/* webpackChunkName: "About" */ "../views/AboutView.vue");
 
 const routes = [
@@ -20,6 +21,11 @@ const routes = [
     name: "EventList",
     component: EventList,
     props: (route) => ({ page: parseInt(route.query.page) || 1 }),
+  },
+  {
+    path: "/event/create",
+    name: "EventCreate",
+    component: EventCreate,
   },
   {
     path: "/events/:id",
@@ -69,11 +75,8 @@ const routes = [
   },
   {
     path: "/about",
-    name: "about",
-    // Route level code-splitting
-    // This generates a separate chunk (about.[hash].js) for his route
-    // Which is lazy-loaded when the route is visited
-    component: About,
+    name: "AboutView",
+    component: AboutView,
   },
   {
     path: "/:catchAll(.*)",
