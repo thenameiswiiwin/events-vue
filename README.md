@@ -10,20 +10,20 @@ https://events-for-good-l7jz.onrender.com/
 
 ## Project Setup
 
-* Cloning this project:
-`git clone https://github.com/thenameiswiiwin/real-world-events-vue.git`
+- Cloning this project:
+  `git clone https://github.com/thenameiswiiwin/real-world-events-vue.git`
 
-* Installing all dependencies:
-`yarn install`
+- Installing all dependencies:
+  `yarn install`
 
-* Compiles and hot-reloads for development:
-`yarn serve`
+- Compiles and hot-reloads for development:
+  `yarn serve`
 
-* Compiles and minifies for production:
-`yarn build`
+- Compiles and minifies for production:
+  `yarn build`
 
-* Lints and fixes files:
-`yarn lint`
+- Lints and fixes files:
+  `yarn lint`
 
 ---
 
@@ -316,3 +316,38 @@ const store = new Vuex.Store({
 })
 ```
 
+> ## Global State
+
+> > ### Adding Global State
+
+`store/index.js`
+
+```JavaScript
+import { createStore } from 'vuex'
+
+export default createStore({
+  state: {
+    flashMessage: "",
+    event: null,
+    user: 'Adam Jahr'
+  }
+  ...
+})
+```
+
+These `states` is globally accessible throughout the application. Vuex "injects" ahte store into all child components from the root component, and will be available on them as `this.$store`.
+
+Access the global states by writting `this.$store.state.<name>`.
+
+However, it’s recommended to keep your `data` separate from your Vuex state to avoid reactivity issues. For example, if the value of your state’s `user` changed, that change won’t be reflected within the data property where you initially called it, since the data is only created once when the component is constructed.
+
+So to avoid accidentally submitting stale state attached to the `event`, we can instead set the organizer for our event when we submit the form. That way, we are only ever accessing the `user` state when we’re ready to create the event.
+
+```JavaScript
+methods: {
+  onSubmit() {
+    this.event.organizer = this.$store.state.user
+    console.log("Event:", this.event)
+  }
+}
+```
