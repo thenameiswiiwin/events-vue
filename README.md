@@ -351,3 +351,69 @@ methods: {
   }
 }
 ```
+
+> ## Updating State
+
+`Spread Operator`
+
+```JavaScript
+onSubmit() {
+  const event = {
+    ...this.event,
+    id: uuidv4(),
+    organizer: this.$store.state.user
+  }
+  EventService.postEvent(event)
+    // code omitted
+}
+```
+
+By using the spread operator `...`, we're able to take the original `event` object and "spread" out its properties onto a new object along with the additional properties we need (`id` and `organizer`).
+
+>>  ### Updating our State
+
+`Muatations` are what we use within Vuex to update or `mutate` the state.:w
+
+`store/index.js`
+
+```JavaScript
+export default createStore({
+  state: {
+    user: 'Adam Jahr',
+    events: [] // new events array
+  },
+  mutations: {
+    ADD_EVENT(state, event) { // our first mutation
+      state.events.push(event)
+    }
+  }
+  ...
+)}
+```
+
+`ADD_EVENT` mutation takes in two arguments: the Vuex `state` itself, and the `event` that we want to `push` onto our new `events` array within that state. That's as simple as it is. We’ve just written the code that we can call to add events to our state.
+
+Now we need to `call or commit` this mutation from within our `EventCreate` component. We’ll do so within the `onSubmit` method.
+
+`views/EventCreate.vue`
+
+```JavaScript
+onSubmit() {
+  const event = {
+    ...this.event,
+    id: uuidv4(),
+    organizer: this.$store.state.user
+  }
+  EventService.postEvent(event)
+  .then(() => {
+    this.$store.commit('ADD_EVENT', event)
+  })
+  .catch(error => {
+    console.log(error)
+  })
+}
+```
+
+The code within the `.then()` === We’re accessing our global Vuex store `(this.$store)` and telling it to `commit` the mutation that we’ve specified in the first argument (`ADD_EVENT`), and we’re passing in the event that we want to add.
+
+As for terminology: This second argument is called the payload. And `commit` is just Vuex syntax that means we are calling our mutation, which commits us to a new state within our app. And if you’re wondering why I put the mutation name in all caps, that is a convention that is common for mutations. It’s entirely optional. The benefit that I personally like about the all caps is that it makes it very visually obvious when a state change is set to occur.
