@@ -35,7 +35,6 @@ export default {
   },
   data() {
     return {
-      events: null,
       totalEvents: 0,
     };
   },
@@ -61,10 +60,26 @@ export default {
         return { name: "NetworkError" };
       });
   },
+  created() {
+    this.$store.dispatch("fetchEvents");
+  },
   computed: {
     hasNextPage() {
+    {
+      "id": "b384938c-0cd8-44b4-a162-71b1b0aeea28",
+      "category": "animal welfare",
+      "title": "1",
+      "description": "1",
+      "location": "1",
+      "date": "1",
+      "time": "1",
+      "organizer": "Huy Nguyen"
+    }
       var totalPages = Math.ceil(this.totalEvents / 2);
       return this.page < totalPages;
+    },
+    events() {
+      return this.$store.state.events;
     },
   },
 };
