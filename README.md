@@ -417,3 +417,160 @@ onSubmit() {
 The code within the `.then()` === We’re accessing our global Vuex store `(this.$store)` and telling it to `commit` the mutation that we’ve specified in the first argument (`ADD_EVENT`), and we’re passing in the event that we want to add.
 
 As for terminology: This second argument is called the payload. And `commit` is just Vuex syntax that means we are calling our mutation, which commits us to a new state within our app. And if you’re wondering why I put the mutation name in all caps, that is a convention that is common for mutations. It’s entirely optional. The benefit that I personally like about the all caps is that it makes it very visually obvious when a state change is set to occur.
+
+> > ### Error Handling
+
+>>> ### The ErrorDisplay Component
+
+The component use to display the errors will be quite simple. It just needs a template that prints our the error, which the component receives as prop.
+
+```JavaScript
+<template>
+    <h4>Oops! There was an error:</h4>
+    <p>{{ error }}</p>
+</template>
+
+<script>
+export default {
+    props: ['error']
+}
+</script>
+```
+
+>>> ### Adding ErrorDisplay as a Route
+
+Import the new ErrorDisplay.vue file into the route's `index.js` file and add a route object for it.
+
+
+```JavaScript
+// ...
+import ErrorDisplay from '@/views/ErrorDisplay.vue'
+
+const routes = [
+  // ...
+  {
+    path: '/error/:error',
+    name: 'ErrorDisplay',
+    props: true,
+    component: ErrorDisplay
+  }
+]
+```
+
+Note: the route's `path` has `:error` on it. This is a dynamic segment, which we're giving `ErrorDisplay` access to as a prop with `props: true`.
+
+>>> ### Accessing the error from the action
+
+We need a way for the component that ultimately triggered the error to gain access to that error. This means a coupple things, First, we need to `return` the result of our Vuex actions' API calls so that the component that dispatched them can receive that result. Second, we need the action that caught the error to `throw` it to the component that caused it, so it can `catch` it, too.
+
+```JavaScript
+  actions: {
+    createEvent({ commit }, event) {
+      EventService.postEvent(event)
+        .then(() => {
+          commit('ADD_EVENT', event)
+        })
+        .catch(error => {
+          throw(error) // <--- throw error
+        })
+    },
+    fetchEvents({ commit }) {
+      return EventService.getEvents() // <--- return result
+        .then(response => {
+          commit('SET_EVENTS', response.data)
+        })
+        .catch(error => {
+          throw(error) // <--- throw error
+        })
+    },
+    fetchEvent({ commit, state }, id) {
+      const existingEvent = state.events.find(event => event.id === id)
+      if (existingEvent) {
+          commit('SET_EVENT', existingEvent)
+      } else {
+        return EventService.getEvent(id) // <--- return result
+          .then(response => {
+            commit('SET_EVENT', response.data)
+          })
+          .catch(error => {
+            throw(error) // <--- throw error
+          })
+      }
+    }
+  }
+```
+
+With these adjustments in place, we're ready to `catch` the error locally in the component. And when an error is caught, we'll route to the `ErrorDisplay` view, and display that error.
+
+>>> ### Routing to ErrorDisplay
+
+Add routing behavior to `EventCreate.vue`
+
+```JavaScript
+onSubmit() {
+  // ...
+  this.$store.dispatch('createEvent', event)
+    .then( () => {
+      this.$router.push({
+        name: 'EventDetails',
+        params: { id: this.event.id }
+      })
+    })
+    .catch( error => {
+      this.$router.push({
+        name: 'ErrorDisplay',
+        params: { error: error }
+      })
+    })
+}
+```
+
+We now have some simple routing logic. If the event is created successfully, we'll route the user to view that event's details. If there was an error, we'll route them to view that error. Giving the `ErrorDisplay` route access to the `error` as a param, which will be fed in as a prop.
+
+```JavaScript
+<template>
+  <h4>Oops! There was an error:</h4>
+  <p>{{ error }}</p>
+</template>
+
+<script>
+export default {
+  props: ['error']
+}
+</script>
+```
+
+Next, repeat the same process within `EventList` and `EventDetails` that might generate an error. Both of these components dispatch actions that fetchEvent(s) from the mock db, so in each we need to add a `catch` wherein we route to the `ErrorDisplay` component to display the erro component to display the error.
+
+```JavaScript
+// views/EventList.vue
+created() {
+  this.$store.dispatch('fetchEvents')
+    .catch(error => {
+      this.$router.push({
+        name: 'ErrorDisplay',
+        params: { error: error }
+      })
+    })
+},
+```
+
+
+```JavaScript
+// views/EventDetails.vue
+created() {
+  this.$store.dispatch('fetchEvent', this.id)
+    .catch(error => {
+      this.$router.push({
+        name: 'ErrorDisplay',
+        params: { error: error }
+      })
+    })
+},
+```
+
+Now that the error handling is all set up, we can check to make sure this is working by forcing a network error to happen. We'll just go into the EventService file, and messup the `baseURL`, giving it the wrong string:
+
+```JavaScript
+baseURL: 'http://localhost:3008', // <--- supposed to be 'http://localhost:3000'
+```
