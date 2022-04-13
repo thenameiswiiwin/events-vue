@@ -11,3 +11,17 @@
     <router-view :event="this.$store.state.event" />
   </div>
 </template>
+
+<script>
+export default {
+  props: ["id"],
+  created() {
+    this.$store.dispatch("fetchEvent", this.id);
+  },
+  computed: {
+    event() {
+      return this.$store.state.event;
+    },
+  },
+};
+</script>

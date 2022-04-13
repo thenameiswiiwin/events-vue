@@ -32,26 +32,6 @@
       "time": "11:00",
       "petsAllowed": false,
       "organizer": "Carey Wales"
-    },
-    {
-      "id": "671fae9a-ae62-49a5-a142-c3183eb0f6fb",
-      "category": "animal welfare",
-      "title": "Horse Brushing Race",
-      "description": "A fun event",
-      "location": "Austin, TX",
-      "date": "August 18, 2028",
-      "time": "@2:00",
-      "organizer": "Huy Nguyen"
-    },
-    {
-      "id": "4202cc8f-9517-4ace-a8bc-8d822eeb50ab",
-      "category": "animal welfare",
-      "title": "Kangaroo Combing Competition",
-      "description": "What does this event look like?",
-      "location": "Austin, TX",
-      "date": "Sept 4, 2025",
-      "time": "@3:00",
-      "organizer": "Huy Nguyen"
     }
   ]
 }
